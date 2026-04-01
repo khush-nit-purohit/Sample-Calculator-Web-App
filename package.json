@@ -1,0 +1,16 @@
+{
+  "name": "calculator-website",
+  "version": "1.0.0",
+  "description": "A simple calculator website ready for cloud deployment",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000 -c-1",
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": [
+    "calculator",
+    "web"
+  ],
+  "author": "",
+  "license": "MIT"
+}
