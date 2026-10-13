@@ -1,99 +1,85 @@
-"""
-fibonacci_generator.py
-
-This module provides a function to generate a Fibonacci sequence up to a specified
-number of terms. The Fibonacci sequence is a series of numbers where each number
-is the sum of the two preceding ones, usually starting with 0 and 1.
-
-Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
-"""
-
-def generate_fibonacci_sequence(n: int) -> list[int]:
+def fibonacci(n):
     """
-    Generates the first 'n' Fibonacci numbers.
+    Calculates the nth Fibonacci number.
 
-    The Fibonacci sequence starts with 0 and 1, and each subsequent number
-    is the sum of the two preceding ones.
+    The Fibonacci sequence is a series of numbers where each number is the sum
+    of the two preceding ones, usually starting with 0 and 1.
+    (e.g., 0, 1, 1, 2, 3, 5, 8, 13, ...)
 
     Args:
-        n (int): The number of Fibonacci terms to generate.
-                 Must be a non-negative integer.
+        n (int): The index of the desired Fibonacci number (non-negative integer).
 
     Returns:
-        list[int]: A list containing the first 'n' Fibonacci numbers.
+        int: The nth Fibonacci number.
 
     Raises:
-        ValueError: If 'n' is a negative integer.
-
-    Examples:
-        >>> generate_fibonacci_sequence(0)
-        []
-        >>> generate_fibonacci_sequence(1)
-        [0]
-        >>> generate_fibonacci_sequence(2)
-        [0, 1]
-        >>> generate_fibonacci_sequence(5)
-        [0, 1, 1, 2, 3]
-        >>> generate_fibonacci_sequence(10)
-        [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+        ValueError: If n is a negative integer.
+        TypeError: If n is not an integer.
     """
     if not isinstance(n, int):
-        raise TypeError("Input 'n' must be an integer.")
+        raise TypeError("Input must be an integer.")
     if n < 0:
-        raise ValueError("Input 'n' must be a non-negative integer.")
-
-    # Handle base cases for the Fibonacci sequence
-    if n == 0:
-        return []
+        raise ValueError("Input must be a non-negative integer.")
+    elif n == 0:
+        return 0
     elif n == 1:
-        return [0]
-    elif n == 2:
-        return [0, 1]
+        return 1
+    else:
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+        return b
 
-    # Initialize the sequence with the first two terms
-    fib_sequence = [0, 1]
-
-    # Generate subsequent terms iteratively
-    # We already have 2 terms, so we iterate n-2 times
-    for _ in range(2, n):
-        next_fib = fib_sequence[-1] + fib_sequence[-2]
-        fib_sequence.append(next_fib)
-
-    return fib_sequence
-
-# --- Example Usage and Demonstration ---
 if __name__ == "__main__":
-    print("--- Fibonacci Sequence Generator ---")
+    print("--- Fibonacci Sequence Examples ---")
 
-    # Test cases with various inputs
-    test_cases = [0, 1, 2, 5, 10, 15, 20]
+    # Example 1: Calculate the 0th Fibonacci number
+    try:
+        print(f"Fibonacci(0): {fibonacci(0)}")  # Expected: 0
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
 
-    for num_terms in test_cases:
-        try:
-            sequence = generate_fibonacci_sequence(num_terms)
-            print(f"Fibonacci sequence for n = {num_terms}: {sequence}")
-        except (ValueError, TypeError) as e:
-            print(f"Error generating sequence for n = {num_terms}: {e}")
+    # Example 2: Calculate the 1st Fibonacci number
+    try:
+        print(f"Fibonacci(1): {fibonacci(1)}")  # Expected: 1
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
+
+    # Example 3: Calculate the 7th Fibonacci number
+    try:
+        print(f"Fibonacci(7): {fibonacci(7)}")  # Expected: 13
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
+
+    # Example 4: Calculate the 10th Fibonacci number
+    try:
+        print(f"Fibonacci(10): {fibonacci(10)}") # Expected: 55
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
+
+    # Example 5: Test with a larger number
+    try:
+        print(f"Fibonacci(20): {fibonacci(20)}") # Expected: 6765
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
 
     print("
---- Testing Edge Cases and Error Handling ---")
+--- Error Handling Examples ---")
 
-    # Test with a negative number
+    # Example 6: Test with a negative input
     try:
-        print(f"Fibonacci sequence for n = -5: {generate_fibonacci_sequence(-5)}")
+        print(f"Fibonacci(-5): {fibonacci(-5)}")
     except (ValueError, TypeError) as e:
-        print(f"Error generating sequence for n = -5: {e}")
+        print(f"Caught expected error for negative input: {e}")
 
-    # Test with a non-integer input
+    # Example 7: Test with a non-integer input (float)
     try:
-        print(f"Fibonacci sequence for n = 3.5: {generate_fibonacci_sequence(3.5)}")
+        print(f"Fibonacci(3.5): {fibonacci(3.5)}")
     except (ValueError, TypeError) as e:
-        print(f"Error generating sequence for n = 3.5: {e}")
+        print(f"Caught expected error for float input: {e}")
 
-    # Test with a large number (demonstrates efficiency of iterative approach)
-    large_n = 50
-    print(f"
-Fibonacci sequence for n = {large_n} (first 10 terms shown):")
-    large_sequence = generate_fibonacci_sequence(large_n)
-    print(large_sequence[:10], "...", large_sequence[-1]) # Print first 10 and the last term
-    print(f"Length of sequence: {len(large_sequence)}")
+    # Example 8: Test with a non-integer input (string)
+    try:
+        print(f"Fibonacci('abc'): {fibonacci('abc')}")
+    except (ValueError, TypeError) as e:
+        print(f"Caught expected error for string input: {e}")
