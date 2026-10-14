@@ -1,3 +1,4 @@
+# fibonacci_sequence.py
 def fibonacci(n):
     """
     Calculates the nth Fibonacci number.
@@ -15,6 +16,7 @@ def fibonacci(n):
 
     Raises:
         ValueError: If n is a negative integer.
+        TypeError: If n is not an integer.
     """
     if not isinstance(n, int):
         raise TypeError("Input must be an integer.")
@@ -43,6 +45,7 @@ def generate_fibonacci_sequence(count):
 
     Raises:
         ValueError: If count is a negative integer.
+        TypeError: If count is not an integer.
     """
     if not isinstance(count, int):
         raise TypeError("Input must be an integer.")
